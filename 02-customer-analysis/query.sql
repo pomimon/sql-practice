@@ -1,20 +1,22 @@
--- Selects customer number, credit limit and total payment amount after summing all amounts under the customer
--- grabs information from customer table and joins the corresponding customer from the payment table, including null values 
--- then groups the customer number and credit limits 
+
 
 SELECT 
   c.customerNumber, 
   c.creditLimit, 
   SUM(p.amount) AS totalAmount
-FROM customers c
-LEFT JOIN payments p
-ON c.customerNumber = p.customerNumber
-GROUP BY c.customerNumber, c.creditLimit
+FROM
+  customers c
+LEFT JOIN
+  payments p
+ON
+  c.customerNumber = p.customerNumber
+GROUP BY
+  c.customerNumber, c.creditLimit
 
 
 
 
-
+-- shows the amount the customer ordered, the order total and the amount that has been paid
 
 SELECT 
   c.customerNumber,
@@ -46,9 +48,7 @@ ORDER BY
 
 
 
-
-
-
+-- shows customer number, who their sales rep is, what they ordered, how many of that item is in stock, the quantity ordered, price of each item, order total, and order status
 
 SELECT
   cs.customerNumber,
@@ -77,5 +77,7 @@ ON
   od.orderNumber = o.orderNumber
 JOIN
   products p
-ON p.productCode = od.productCode
-ORDER BY cs.customerNumber ASC
+ON
+  p.productCode = od.productCode
+ORDER BY
+  cs.customerNumber ASC
